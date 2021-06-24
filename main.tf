@@ -1,5 +1,5 @@
 provider "aws" {
-  region  = "${var.region}"
+  region  = var.region
   profile = "Some Germany company"
 }
 
@@ -16,23 +16,23 @@ data "aws_ami" "latest" {
 /* EC2 description */
 resource "aws_instance" "something-application" {
 
-  ami                         = "${data.aws_ami.latest.id}"
-  instance_type               = "${var.instanceType}"
-  key_name                    = "${var.sshKeyName}"
+  ami                         = data.aws_ami.latest.id
+  instance_type               = var.instanceType
+  key_name                    = var.sshKeyName
   monitoring                  = "true"
   associate_public_ip_address = "true"
-  availability_zone           = "${var.aZone}"
-  subnet_id                   = "${aws_subnet.sgc-subnet.id}"
-  vpc_security_group_ids      = ["${aws_security_group.target.id}",
-    "${aws_security_group.control.id}",
-    "${aws_security_group.public.id}",
-    "${aws_security_group.db.id}"]
-  count                       = "${var.instanceCount}"
+  availability_zone           = var.aZone
+  subnet_id                   = aws_subnet.sgc-subnet.id
+  vpc_security_group_ids      = [aws_security_group.target.id,
+    aws_security_group.control.id,
+    aws_security_group.public.id,
+    aws_security_group.db.id]
+  count                       = var.instanceCount
   user_data                   = file("bootstrap.sh")
   
   root_block_device {
-   volume_size            = "${var.volumeSize}"
-    volume_type           = "gp3"
+   volume_size            = var.volumeSize
+    volume_type           = "gp2"
     encrypted             = "false"
     delete_on_termination = "true"
   }

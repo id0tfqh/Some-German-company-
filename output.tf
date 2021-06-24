@@ -1,6 +1,6 @@
 /* Print server IP */
 output "server_ip" {
-    value = aws_instance.node-application.*.public_ip
+    value = aws_instance.something-application.*.public_ip
     description = "The public IP address of the main server instance."
 }
 
