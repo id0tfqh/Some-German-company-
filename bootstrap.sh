@@ -12,4 +12,7 @@ sudo systemctl start docker
 sudo systemctl enable docker
 systemctl status docker
 
+# dirty hack
+docker pull node:lts-buster-slim
+
 exit $?

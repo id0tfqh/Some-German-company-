@@ -45,6 +45,12 @@ variable "instanceType" {
     default = "m5.large"
 }
 
+variable "instanceTypeDB" {
+    description = "Instance type"
+    type = "string"
+    default = "db.m5.large"
+}
+
 variable "mainIP" {
     description = "Remote access address"
     type = "string"

@@ -25,7 +25,8 @@ resource "aws_instance" "something-application" {
   subnet_id                   = "${aws_subnet.sgc-subnet.id}"
   vpc_security_group_ids      = ["${aws_security_group.target.id}",
     "${aws_security_group.control.id}",
-    "${aws_security_group.public.id}"]
+    "${aws_security_group.public.id}",
+    "${aws_security_group.db.id}"]
   count                       = "${var.instanceCount}"
   user_data                   = file("bootstrap.sh")
   

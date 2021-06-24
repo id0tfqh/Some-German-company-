@@ -19,6 +19,16 @@ resource "aws_security_group" "control" {
   }
 }
 
+resource "aws_security_group" "db" {
+  name = "db-access"
+  description = "Allow db access"
+  vpc_id = "${aws_vpc.sgc-vpc.id}"
+  tags = {
+    Name = "something"
+    Project = "Super project"
+  }
+}
+
 resource "aws_security_group" "public" {
   name = "outgoing-traffic"
   description = "Allow all outbound traffic"
@@ -28,6 +38,7 @@ resource "aws_security_group" "public" {
     Project = "Super project"
   }
 }
+
 
 /* Security group rule description */
 resource "aws_security_group_rule" "http" {
@@ -47,6 +58,16 @@ resource "aws_security_group_rule" "ssh" {
     to_port = 22
     protocol = "tcp"
     security_group_id = "${aws_security_group.control.id}"
+    cidr_blocks = ["${var.mainIP}"]
+}
+
+resource "aws_security_group_rule" "db" {
+    description = "Allow to DB access"
+    type = "ingress"
+    from_port = 3306
+    to_port = 3306
+    protocol = "tcp"
+    security_group_id = "${aws_security_group.db.id}"
     cidr_blocks = ["${var.mainIP}"]
 }
 
