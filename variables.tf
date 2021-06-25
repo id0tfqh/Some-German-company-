@@ -13,7 +13,7 @@ variable "aZone" {
 variable "sshKeyName" {
     description = "ssh key"
     type = string
-    default = "sgm"
+    default = "SGC"
 }
 
 variable "instanceCount" {
@@ -25,7 +25,7 @@ variable "instanceCount" {
 variable "volumeSize" {
     description = "The volume size for the root volume in GiB"
     type    = string
-    default = "12"
+    default = "20"
 }
 
 variable "vpcCidr" {

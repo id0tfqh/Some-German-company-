@@ -1,6 +1,6 @@
 /* S3 bucket description */
 resource "aws_s3_bucket" "backup-files" {
-  bucket = "backup-data"
+  bucket = "backupdatasgc"
   acl    = "private"
   versioning {
       enabled = true

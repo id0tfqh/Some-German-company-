@@ -31,7 +31,7 @@ resource "aws_instance" "something-application" {
   user_data                   = file("bootstrap.sh")
   
   root_block_device {
-   volume_size            = var.volumeSize
+    volume_size            = var.volumeSize
     volume_type           = "gp2"
     encrypted             = "false"
     delete_on_termination = "true"
